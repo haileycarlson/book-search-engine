@@ -9,6 +9,8 @@ const {
   ApolloServerPluginDrainHttpServer,
 } = require('@apollo/server/plugin/drainHttpServer')
 const http = require('http')
+const { authMiddleware } = require('./utils/auth')
+
 
 // Import the two parts of a GraphQL schema
 const { typeDefs, resolvers } = require('./schema')
@@ -43,10 +45,13 @@ const startApolloServer = async (typeDefs, resolvers) => {
   app.use(
     '/graphql',
     expressMiddleware(server, {
-      context: authMiddleware,
+      context: authMiddleware
     }),
   )
-
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'))
+  })
+    
   db.once('open', () => {
     httpServer.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`)
