@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const db = require('./config/connection')
-const routes = require('./routes')
+
 // Import the ApolloServer class
 const { ApolloServer } = require('@apollo/server')
 const { expressMiddleware } = require('@apollo/server/express4')
@@ -48,7 +48,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
       context: authMiddleware
     }),
   )
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'))
   })
     
