@@ -32,24 +32,7 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     saveBook(bookId: ID!): User
     removeBook(bookId: ID!): User
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 `
 
 module.exports = typeDefs
