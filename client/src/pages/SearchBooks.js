@@ -67,9 +67,9 @@ const [saveBook, {error}] = useMutation(SAVE_BOOK)
     }
 
     try {
-      const response = await saveBook({
+      const { data } = await saveBook({
         variables: {
-          bookData: {
+          newBook: {
             ...bookToSave
           }
         }
