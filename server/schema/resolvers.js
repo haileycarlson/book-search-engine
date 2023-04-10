@@ -7,8 +7,8 @@ const resolvers = {
     // get a single user by either their id or their username
     me: async (parent, args,context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
-        return userData;
+        const user = await User.findOne({ _id: context.user._id }).select('-__v -password');
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!');
   },
